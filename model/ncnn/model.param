@@ -1,0 +1,18 @@
+7767517
+19 19
+Input            conv2d_input             0 1 conv2d_input
+Permute          Transpose1               1 1 conv2d_input adjusted_input 0=4
+Convolution      conv2d                   1 1 adjusted_input convolution_output 0=128 1=2 11=2 2=1 12=1 3=1 13=1 5=1 6=512
+ReLU             Relu2                    1 1 convolution_output conv2d/Identity:0
+Pooling          conv2d/Identity:0_pooling 1 1 conv2d/Identity:0 conv2d/Identity:0_pooling0 0=0 1=2 11=2 2=2 12=2 5=1
+Permute          conv2d/Identity:0_transpose 1 1 conv2d/Identity:0_pooling0 conv2d/Identity:0_transpose0 0=3
+Flatten          flatten                  1 1 conv2d/Identity:0_transpose0 flatten/Identity:0
+InnerProduct     dense                    1 1 flatten/Identity:0 dense0 0=128 1=0 2=720896
+BinaryOp         Add2                     2 1 dense0 dense/bias:0 biased_tensor_name2 0=0
+ReLU             Relu1                    1 1 biased_tensor_name2 dense/Identity:0
+InnerProduct     dense_1                  1 1 dense/Identity:0 dense_10 0=128 1=0 2=16384
+BinaryOp         Add1                     2 1 dense_10 dense_1/bias:0 biased_tensor_name1 0=0
+ReLU             Relu                     1 1 biased_tensor_name1 dense_1/Identity:0
+InnerProduct     dense_2                  1 1 dense_1/Identity:0 dense_20 0=6 1=0 2=768
+BinaryOp         Add                      2 1 dense_20 dense_2/bias:0 biased_tensor_name 0=0
+Softmax          Softmax                  1 1 biased_tensor_name dense_2 0=-2

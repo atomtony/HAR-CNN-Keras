@@ -77,7 +77,7 @@ def segment_signal(data, window_size = 90):
 ''' Main Code '''
 # # # # # # # # #   reading the data   # # # # # # # # # # 
 # Path of file #
-dataset = readData('actitracker_raw.txt')
+dataset = readData('data/standing.txt')
 # plotting a subset of the data to visualize
 for activity in np.unique(dataset['activity']):
     subset = dataset[dataset['activity']==activity][:180]
@@ -146,6 +146,6 @@ for layer in model.layers:
 model.fit(trainX,trainY, validation_split=1-trainSplitRatio,epochs=10,batch_size=batchSize,verbose=2)
 score = model.evaluate(testX,testY,verbose=2)
 print('Baseline Error: %.2f%%' %(100-score[1]*100))
-model.save('model.h5')
+model.save('model/keras/model.h5')
 np.save('groundTruth.npy',testY)
 np.save('testData.npy',testX)

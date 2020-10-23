@@ -50,7 +50,7 @@ def plot_cm(cM, labels,title):
     # saving the figure
     fig.savefig(title +'.png')
 # loading the pretrained model
-model = load_model('model.h5')
+model = load_model('model/keras/model.h5')
 #loading the testData and groundTruth data
 test_x = np.load('testData.npy')
 groundTruth = np.load('groundTruth.npy')

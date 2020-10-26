@@ -8,7 +8,7 @@ python keras2onnx_demo.py
 
 ## onnx模型转ncnn
 
-前提是已经编译ncnn，然后执行以下命令
+前提是已经编译ncnn（版本ncnn-20181228），然后执行以下命令
 
 ```
 /home/jht/Downloads/ncnn-20181228/build/tools/onnx/onnx2ncnn \

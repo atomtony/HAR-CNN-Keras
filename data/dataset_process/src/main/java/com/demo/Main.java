@@ -24,7 +24,7 @@ public class Main {
 
         for (String line : lines) {
             // 33,Jogging,49106442306000,1.3756552,-2.4925237,-6.510526
-            if (!line.contains("X")) {
+            if (!line.contains("X") && line.length() > 0) {
                 String[] array = line.split(",");
                 Date date = formatter.parse(array[0]);
                 long millisTimestamp = date.getTime() + Integer.parseInt(array[1]);
@@ -55,12 +55,15 @@ public class Main {
                 String activity = paths[paths.length - 1 - 1];
                 dealFile(file, writer, userId, activity);
             }
+            writer.flush();
             writer.close();
         } else {
             String destFilename = datasetDir.getName().split("\\.")[0] + ".txt";
             BufferedWriter writer = new BufferedWriter(new FileWriter(new File(datasetDir.getParent(), destFilename)));
             String[] array = datasetDir.getName().split("_");
             dealFile(datasetDir, writer, array[0], array[1]);
+            writer.flush();
+            writer.close();
         }
 
     }

@@ -19,6 +19,8 @@ import os
 os.environ['QT_PLUGIN_PATH'] = ''
 
 np.seterr(divide='ignore', invalid='ignore')
+
+
 def plot_cm(cM, labels, title):
     # normalizing the confusionMatrix for showing the probabilities
     cmNormalized = np.around((cM / cM.sum(axis=1)[:, None]) * 100, 2)
@@ -45,7 +47,7 @@ def plot_cm(cM, labels, title):
         for real in range(height):
             color = 'black'
             if (predicted == real):
-                color = 'blue'
+                color = 'red'
                 print(labels[predicted].ljust(12) + ':', cmNormalized[predicted, real], '%')
             plt.gca().annotate(
                 '{:d}'.format(int(cmNormalized[predicted, real])), xy=(real, predicted),
@@ -58,7 +60,7 @@ def plot_cm(cM, labels, title):
 
 # loading the pretrained model
 model = load_model('model/keras/model.h5')
-#loading the testData and groundTruth data
+# loading the testData and groundTruth data
 test_x = np.load('testData.npy')
 groundTruth = np.load('groundTruth.npy')
 
@@ -72,7 +74,9 @@ groundTruth = np.load('groundTruth.npy')
 
 '''
 # defining the class labels
-labels = ['Downstairs', 'Jogging', 'Sitting', 'Standing', 'Upstairs', 'Walking']
+# labels = ['Downstairs', 'Jogging', 'Sitting', 'Standing', 'Upstairs', 'Walking']
+labels = ['Jogging', 'Walking']
+
 # predicting the classes
 predictions = model.predict(test_x, verbose=2)
 # getting the class predicted and class in ground truth for creation of confusion matrix

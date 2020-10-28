@@ -25,6 +25,9 @@ np.random.seed(random_seed)
 # matplotlib inline
 plt.style.use('ggplot')
 
+# labels_tmp = ['Downstairs', 'Jogging', 'Sitting', 'Standing', 'Upstairs', 'Walking']
+labels_tmp = ['Jogging', 'Walking']
+
 
 # defining function for loading the dataset
 def readData(filePath):
@@ -62,7 +65,7 @@ def plotActivity(activity, data):
     fig.suptitle(activity)
     plt.subplots_adjust(top=0.9)
     plt.show()
-    fig.savefig(activity + '1.png')
+    # fig.savefig(activity + '1.png')
 
 
 # defining a window function for segmentation purposes
@@ -83,7 +86,6 @@ def segment_signal(data, window_size=90):
         z = data['z-axis'][start:end]
         if (len(data['timestamp'][start:end]) == window_size):
             segments = np.vstack([segments, np.dstack([x, y, z])])
-            labels_tmp = ['Downstairs', 'Jogging', 'Sitting', 'Standing', 'Upstairs', 'Walking']
             labelStr = stats.mode(data['activity'][start:end])[0][0]
             index = labels_tmp.index(labelStr)
             label_groundTruth = np.zeros((len(labels_tmp)))
@@ -95,8 +97,7 @@ def segment_signal(data, window_size=90):
 ''' Main Code '''
 # # # # # # # # #   reading the data   # # # # # # # # # # 
 # Path of file #
-# dataset = readData('aa')
-dataset = readData('sensordata.csv')
+dataset = readData('/home/jht/github/HAR-CNN-Keras/data/dataset/merged.txt')
 
 # plotting a subset of the data to visualize
 for activity in np.unique(dataset['activity']):

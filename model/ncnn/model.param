@@ -13,6 +13,6 @@ ReLU             Relu1                    1 1 biased_tensor_name2 dense/Identity
 InnerProduct     dense_1                  1 1 dense/Identity:0 dense_10 0=128 1=0 2=16384
 BinaryOp         Add1                     2 1 dense_10 dense_1/bias:0 biased_tensor_name1 0=0
 ReLU             Relu                     1 1 biased_tensor_name1 dense_1/Identity:0
-InnerProduct     dense_2                  1 1 dense_1/Identity:0 dense_20 0=6 1=0 2=768
+InnerProduct     dense_2                  1 1 dense_1/Identity:0 dense_20 0=2 1=0 2=256
 BinaryOp         Add                      2 1 dense_20 dense_2/bias:0 biased_tensor_name 0=0
 Softmax          Softmax                  1 1 biased_tensor_name dense_2 0=-2
